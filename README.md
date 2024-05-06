@@ -3,7 +3,7 @@
 
 Apple Music Electron is a desktop app in Pre-Alpha for Windows, macOS, and Linux, allowing customization with themes and plugins for a personalized music experience.
 
-IF YOU DON'T SIGN YOU IN AUTOMATICALLY RESTART THE APP
+IF YOU DON'T GET REDIRECTED AUTOMATICALLY AFTER LOGIN RESTART THE APP
 
 [**Documentation (Not finished**)](https://docs.loona.lol/)
 
