@@ -12,7 +12,7 @@
     "dev": "quasar dev",
     "build": "quasar build",
     "electron:dev": "quasar dev -m electron",
-    "electron:build": "quasar build -m electron --target mac --arch x64",
+    "electron:build": "quasar build -m electron",
     "app:dir": "electron-builder --dir",
     "app:dist": "electron-builder"
   },
