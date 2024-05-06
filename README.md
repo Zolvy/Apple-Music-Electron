@@ -1,0 +1,1 @@
+Apple Music Electron is a streamlined desktop app that brings the Apple Music experience to Windows, macOS, and Linux. It soon supports custom themes and plugins™, allowing users to personalize their interface and enhance functionality. This app is ideal for those who want more control over their music player's appearance and features while enjoying their favorite tunes.

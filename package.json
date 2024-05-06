@@ -1,0 +1,61 @@
+{
+  "name": "applemusic",
+  "version": "1.0.0",
+  "description": "Apple Music Electron is a desktop app in Pre-Alpha for Windows, macOS, and Linux, allowing customization with themes and plugins for a personalized music experience.",
+  "productName": "Apple Music Electron",
+  "author": "lunathefur <loona@loona.lol>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "electron:dev": "quasar dev -m electron",
+    "electron:build": "quasar build -m electron --target mac --arch x64",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.4",
+    "@types/node-fetch": "^2.6.11",
+    "bootstrap-icons": "^1.11.3",
+    "connect": "^3.7.0",
+    "discord-auto-rpc": "^1.0.17",
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.0",
+    "install": "^0.13.0",
+    "node-fetch": "^3.3.2",
+    "pinia": "^2.0.11",
+    "quasar": "^2.6.0",
+    "vue": "^3.4.18",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.0.12",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.2",
+    "@intlify/unplugin-vue-i18n": "^2.0.0",
+    "@quasar/app-vite": "^2.0.0-beta.5",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "autoprefixer": "^10.4.2",
+    "electron": "^30.0.1",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "prettier": "^3.0.3",
+    "typescript": "~5.3.0",
+    "vite-plugin-checker": "^0.6.4",
+    "vue-tsc": "^1.8.22"
+  },
+  "engines": {
+    "node": "^24 || ^22 || ^20 || ^18",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

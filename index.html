@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= productName %></title>
+    <meta charset="utf-8">
+    <meta name="description" content="<%= productDescription %>">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>">
+    <link rel="icon" type="image/png" sizes="128x128" href="icons/favicon-128x128.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel=modulepreload href=https://music.apple.com/includes/js-cdn/hls.js/2.610.3/hls.js/hls.js crossorigin="">
+    <link rel=modulepreload href=https://music.apple.com/includes/js-cdn/musickit/v3/amp/musickit.js crossorigin="">
+    <link rel=preconnect href=https://amp-api.music.apple.com crossorigin="">
+    <link rel=preconnect href=https://is1-ssl.mzstatic.com crossorigin="">
+    <link rel=preconnect href=https://is2-ssl.mzstatic.com crossorigin="">
+    <link rel=preconnect href=https://is3-ssl.mzstatic.com crossorigin="">
+    <link rel=preconnect href=https://is4-ssl.mzstatic.com crossorigin="">
+    <link rel=preconnect href=https://is5-ssl.mzstatic.com crossorigin="">
+    <link rel="preconnect" href="https://play.itunes.apple.com/" crossorigin />
+    <link rel="preconnect" href="https://aod-ssl.itunes.apple.com/" crossorigin />
+    <link rel="preconnect" href="https://amp-api.music.apple.com/" crossorigin />
+    <link rel="preconnect" href="https://api.music.apple.com/" crossorigin />
+    <meta name="apple-music-developer-token" content="eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IldlYlBsYXlLaWQifQ.eyJpc3MiOiJBTVBXZWJQbGF5IiwiaWF0IjoxNzEyOTY5NDQxLCJleHAiOjE3MjAyMjcwNDEsInJvb3RfaHR0cHNfb3JpZ2luIjpbImFwcGxlLmNvbSJdfQ.UFr00OkWHnwqPNAXOy5FospHFzX4_hjJU6H-WPU6dquP7KZE5Pe6_CukE3IbPi0EEfzHEvCYwkj84VjKAydnjA" />
+    <meta name="apple-music-app-name" content="My Cool Web App" />
+    <meta name="apple-music-app-build" content="1978.4.1" />
+  </head>
+  <body>
+    <!-- quasar:entry-point -->
+    <script defer src=https://music.apple.com/includes/js-cdn/hls.js/2.610.3/hls.js/hls.js></script>
+    <script async src="https://js-cdn.music.apple.com/musickit/v3/amp/musickit.js" data-web-components></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </html>
