@@ -10,7 +10,7 @@
         <h1 class="album-title">{{ AmpAlbum[0]?.attributes?.name }}</h1>
         <p class="artist-name">{{ AmpAlbum[0]?.attributes?.artistName }}</p>
         <div class="album-controls">
-          <button class="play-btn">Play</button>
+          <button class="play-btn" @click="playMusic(AmpAlbum[0])">Play</button>
           <button class="shuffle-btn">Shuffle</button>
         </div>
       </div>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, Ref } from 'vue';
-import { AlbumCatalog } from './api/album';
+import { AlbumCatalog, playRecord } from './api/album';
 
 interface Artwork {
   url: string;
@@ -47,8 +47,13 @@ export default defineComponent({
       AmpAlbum.value = await AlbumCatalog();
     });
 
+    const playMusic = async (album: Album) => {
+      await playRecord(album);
+    };
+
     return {
       AmpAlbum,
+      playMusic,
     };
   },
 });

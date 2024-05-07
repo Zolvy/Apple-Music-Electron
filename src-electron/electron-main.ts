@@ -3,8 +3,8 @@ import { app, BrowserWindow, dialog, session, ipcMain } from 'electron';
 import path from 'path';
 import os from 'os';
 import { fileURLToPath } from 'url';
-import './proxy.js';
 import './utils/rpc.js';
+//we don't need this anymore. import './proxy.js'
 
 const platform = process.platform || os.platform();
 const currentDir = fileURLToPath(new URL('.', import.meta.url));
@@ -12,7 +12,6 @@ const currentDir = fileURLToPath(new URL('.', import.meta.url));
 let mainWindow: BrowserWindow | null = null;
 
 function createWindow() {
-  // Options common to all platforms
   const windowOptions: Electron.BrowserWindowConstructorOptions = {
     icon: path.resolve(currentDir, 'icons/icon.png'),
     width: 1244,
@@ -28,6 +27,7 @@ function createWindow() {
     webPreferences: {
       contextIsolation: true,
       experimentalFeatures: true,
+      webSecurity: false,
       preload: path.resolve(
         currentDir,
         path.join(
@@ -37,6 +37,24 @@ function createWindow() {
       ),
     },
   };
+
+  const filter = {
+    urls: ['https://*.apple.com/*', '*://amp-api.music.apple.com/*'],
+  };
+
+  const amp_url = 'https://beta.music.apple.com';
+
+  session.defaultSession.webRequest.onBeforeSendHeaders(
+    filter,
+    (details, callback) => {
+      details.requestHeaders['Origin'] = amp_url;
+      /* these lines break loginwindow
+      details.requestHeaders['Host'] = amp_url;
+      details.requestHeaders['Referer'] = amp_url;
+      */
+      callback({ requestHeaders: details.requestHeaders });
+    },
+  );
 
   // macOS-specific options
   if (platform === 'darwin') {
@@ -73,11 +91,11 @@ function createLoginWindow() {
     },
   });
 
-  loginWindow.loadURL('https://music.apple.com/login');
+  loginWindow.loadURL('https://beta.music.apple.com/login');
 
   loginWindow.webContents.on('did-finish-load', async () => {
     const cookies = await session.defaultSession.cookies.get({
-      url: 'https://music.apple.com',
+      url: 'https://beta.music.apple.com',
     });
     console.log('Cookies:', cookies);
     storeCookiesSeparately(cookies);
@@ -88,7 +106,7 @@ function createLoginWindow() {
     if (loginWindow) {
       const url = loginWindow.webContents.getURL();
       console.log('Checking URL:', url);
-      if (url.startsWith('https://music.apple.com/browse')) {
+      if (url.startsWith('https://beta.music.apple.com/browse')) {
         console.log('Matched URL:', url);
         clearInterval(urlCheckInterval);
         if (loginWindow) {
@@ -96,13 +114,13 @@ function createLoginWindow() {
             .showMessageBox(loginWindow, {
               type: 'info',
               title: 'Login Complete',
-              message:
-                'You have reached the browsing page. You may now close this window.',
+              message: 'You have Signed in, the app will now restart.',
               buttons: ['Close Window'],
             })
             .then((result) => {
               if (result.response === 0 && loginWindow) {
                 loginWindow.close();
+                mainWindow?.reload();
               }
             });
         }
@@ -120,10 +138,13 @@ function createLoginWindow() {
 
 function storeCookiesSeparately(cookies: Electron.Cookie[]) {
   cookies.forEach((cookie) => {
-    const cookieKey = `${cookie.name}`;
+    const cookieName =
+      cookie.name === 'media-user-token'
+        ? `music.ampwebplay.${cookie.name}`
+        : cookie.name;
     const cookieValue = cookie.value;
     mainWindow?.webContents.executeJavaScript(
-      `localStorage.setItem('${cookieKey}', '${cookieValue}')`,
+      `localStorage.setItem('${cookieName}', '${cookieValue}')`,
     );
   });
 }

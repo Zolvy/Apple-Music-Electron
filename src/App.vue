@@ -23,7 +23,7 @@ onMounted(() => {
   const checkInterval = setInterval(checkForTokenAndRedirect, 1000);
   setTimeout(() => {
     isLoading.value = false; // Hide loading screen
-    const token = localStorage.getItem('media-user-token');
+    const token = localStorage.getItem('music.ampwebplay.media-user-token');
     if (token) {
       router.push('/am/home');
     } else {

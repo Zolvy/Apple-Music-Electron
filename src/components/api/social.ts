@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const apple_url = 'http://localhost:5500/v1/me/social/profile';
-const auth_token = localStorage.getItem('media-user-token');
+const apple_url = 'https://amp-api.music.apple.com/v1/me/social/profile/';
+//const auth_token = localStorage.getItem('media-user-token');
+const auth_token = localStorage.getItem('music.ampwebplay.media-user-token');
 const dev_token =
   'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IldlYlBsYXlLaWQifQ.eyJpc3MiOiJBTVBXZWJQbGF5IiwiaWF0IjoxNzEyOTY5NDQxLCJleHAiOjE3MjAyMjcwNDEsInJvb3RfaHR0cHNfb3JpZ2luIjpbImFwcGxlLmNvbSJdfQ.UFr00OkWHnwqPNAXOy5FospHFzX4_hjJU6H-WPU6dquP7KZE5Pe6_CukE3IbPi0EEfzHEvCYwkj84VjKAydnjA';
 export async function profile() {

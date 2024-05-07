@@ -5,7 +5,25 @@
       <p>Username</p>
       <input class="input-misc" type="text" v-model="username" />
     </form>
-    <q-btn v-on:click="signOut">Sign Out</q-btn>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        width: 35vh;
+        height: 50px;
+        gap: 30px;
+      "
+    >
+      <q-btn style="background-color: var(--system-Red)" v-on:click="signOut"
+        >Sign Out</q-btn
+      >
+      <q-btn
+        v-on:click="discord"
+        style="background-color: #7289da; color: white; flex-grow: 1"
+      >
+        Join Discord
+      </q-btn>
+    </div>
   </div>
 </template>
 
@@ -14,10 +32,9 @@ import { defineComponent, ref, watch } from 'vue';
 import { useSettingsStore } from '../stores/settings';
 import { useRouter } from 'vue-router';
 
-const router = useRouter();
-
 export default defineComponent({
   setup() {
+    const router = useRouter();
     const settingsStore = useSettingsStore();
     const username = ref(settingsStore.username);
 
@@ -29,13 +46,21 @@ export default defineComponent({
     settingsStore.loadState();
 
     function signOut() {
-      localStorage.removeItem('media-user-token'); // Remove the token from localStorage
-      router.push('/');
+      localStorage.removeItem('music.ampwebplay.media-user-token');
+      router.replace('/');
     }
 
-    return { username, signOut };
+    function discord() {
+      const discordUrl = 'https://discord.gg/d7VacZnMUq';
+      const newWindow = window.open(discordUrl, '_blank');
+      setTimeout(() => {
+        if (newWindow) {
+          newWindow.close();
+        }
+      }, 1000);
+    }
+
+    return { username, signOut, discord };
   },
 });
 </script>
-
-<style scoped></style>

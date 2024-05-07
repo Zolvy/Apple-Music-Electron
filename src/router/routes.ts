@@ -3,16 +3,15 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'), // Main layout for general pages
     children: [
       {
-        path: '', // Default page of main layout
+        path: '',
         component: () => import('src/pages/APM-OBN.vue'),
       },
     ],
   },
   {
-    path: '/am', // Root path for 'AM' section, using its own layout
+    path: '/am',
     component: () => import('layouts/AMLayout.vue'),
     children: [
       {
