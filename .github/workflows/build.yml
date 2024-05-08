@@ -1,40 +1,38 @@
-name: Build/release
+name: Build Apple Music Electron
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest]
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 10
+          node-version: '16'
+          cache: 'pnpm'
 
-      - name: Build/release Electron app
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Electron app
+        run: pnpm run build
+
+      - name: Package Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
-          github_token: ${{ secrets.github_token }}
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
- release:
-    description: Whether the app should be released after a successful build
-    required: true
-    default: false
-
-  package_root:
-    description: Directory where NPM/Yarn commands should be run
-    required: true
-    default: "."
-
-  build_script_name:
-    description: Name of the optional NPM build script which is executed before `electron-builder`
-    required: false
-    default: electron:build
+          github_token: ${{ secrets.GITHUB_TOKEN }}
