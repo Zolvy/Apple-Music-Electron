@@ -1,4 +1,4 @@
-name: Build and Package AME
+name: Build and Package Apple Music Electron
 
 on:
   push:
@@ -14,28 +14,25 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-      fail-fast: false
+      fail-fast: false 
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'pnpm'
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+    - name: Install dependencies
+      run: npm install
 
-      - name: Install dependencies
-        run: pnpm install
+    - name: Build Electron app
+      run: npm run build
 
-      - name: Build Electron app
-        run: pnpm run electron:build
-
-      - name: Package Electron app
-        uses: samuelmeuli/action-electron-builder@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Package Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
