@@ -17,3 +17,8 @@ IF YOU DON'T GET REDIRECTED AUTOMATICALLY AFTER LOGIN RESTART THE APP
 [0vfx](https://github.com/0vf)
 
 [Arthur](https://www.instagram.com/arthurtheonlyartist?igsh=MTJ4aXFmMWQzNzVlaA%3D%3D&utm_source=qr)
+
+---
+# Disclaimer
+
+This project is NOT affiliated with Apple in any way shape or form. The project is open source and free to use (with an Apple Music subscription) for any legal concerns contact me at loona@loona.lol.
