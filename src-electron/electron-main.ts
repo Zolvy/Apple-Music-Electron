@@ -38,20 +38,28 @@ function createWindow() {
     },
   };
 
-  const filter = {
-    urls: ['https://*.apple.com/*', '*://amp-api.music.apple.com/*'],
-  };
-
-  const amp_url = 'https://beta.music.apple.com';
-
   session.defaultSession.webRequest.onBeforeSendHeaders(
-    filter,
-    (details, callback) => {
-      details.requestHeaders['Origin'] = amp_url;
-      /* these lines break loginwindow
-      details.requestHeaders['Host'] = amp_url;
-      details.requestHeaders['Referer'] = amp_url;
-      */
+    async (details, callback) => {
+      if (details.url === 'https://buy.itunes.apple.com/account/web/info') {
+        details.requestHeaders['sec-fetch-site'] = 'same-site';
+        details.requestHeaders['DNT'] = '1';
+        const itspod = await mainWindow?.webContents.executeJavaScript(
+          'window.localStorage.getItem("itspod")',
+        );
+        if (itspod !== null) {
+          details.requestHeaders['Cookie'] = `itspod=${itspod}`;
+        }
+      }
+      if (details.url.includes('apple.com')) {
+        details.requestHeaders['DNT'] = '1';
+        details.requestHeaders['authority'] = 'amp-api.music.apple.com';
+        details.requestHeaders['origin'] = 'https://beta.music.apple.com';
+        details.requestHeaders['referer'] = 'https://beta.music.apple.com';
+        details.requestHeaders['sec-fetch-dest'] = 'empty';
+        details.requestHeaders['sec-fetch-mode'] = 'cors';
+        details.requestHeaders['sec-fetch-site'] = 'same-site';
+      }
+      // Call the callback with modified headers
       callback({ requestHeaders: details.requestHeaders });
     },
   );

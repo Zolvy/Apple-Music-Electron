@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const apple_url = 'https://amp-api.music.apple.com/v1/me/recent/played';
+const apple_url =
+  'https://amp-api.music.apple.com/v1/me/recent/played?&limit=20';
 //const auth_token = localStorage.getItem('media-user-token');
 
 const auth_token = localStorage.getItem('music.ampwebplay.media-user-token');

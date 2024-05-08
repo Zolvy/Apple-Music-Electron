@@ -41,7 +41,7 @@ onMounted(() => {
 
 function checkForTokenAndRedirect() {
   if (route.path === '/') {
-    const token = localStorage.getItem('media-user-token');
+    const token = localStorage.getItem('music.ampwebplay.media-user-token');
     if (token) {
       console.log('Token found: ', token);
     } else {
